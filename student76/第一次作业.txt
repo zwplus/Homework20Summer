@@ -1,0 +1,31 @@
+//p252.8 
+#include <iostream>
+using namespace std;
+#include <string>
+class Cat{
+	private:
+	    int age,weight;
+	    string color;
+	public:
+	    void setAge(int a){
+	   	    age=a;
+	    }
+	   void setWeight(int w){
+	   	    weight=w;
+	    }
+	    void setColor(const char *c){
+	   	    color=c;
+	    }
+	    void print(){
+	    	cout<<"age = "<<age<<endl;
+	    	cout<<"weight = "<<weight<<endl;
+	    	cout<<"Its color is "<<color<<endl;
+		}		
+}; 
+int main(){
+	Cat s;
+	s.setAge(8);
+	s.setWeight(16);
+	s.setColor("yellow");
+	s.print();
+}
