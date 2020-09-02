@@ -1,0 +1,260 @@
+//P293 第十四题
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<cstring>
+#include<time.h>
+using namespace std;
+
+class Date
+{
+private:
+	int year, month, day;
+public:
+	Date(int y,int m,int d)
+	{
+		year = y;
+		month = m;
+		day = d;
+	}
+	Date()
+	{
+		time_t now = time(0);
+		tm* ltm = localtime(&now);
+		year = 1900 + ltm->tm_year;
+		month = 1 + ltm->tm_mon;
+		day = ltm->tm_mday;
+	}
+	int getyear()
+	{
+		return year;
+	}
+	void setyear(int x)
+	{
+		if (x>=0)
+			year = x, cout << "Set Complete" << endl;
+		else
+			cout << "Set Fail" << endl;
+	}
+	int getmonth()
+	{
+		return month;
+	}
+	void setmonth(int x)
+	{
+		if (x >= 1 && x <= 12)
+			month = x, cout << "Set Complete" << endl;
+		else
+			cout << "Set Fail" << endl;
+	}
+	int getday()
+	{
+		return day;
+	}
+	void setday(int x)
+	{
+		if (x >= 1 && x <= 31)
+			day = x, cout << "Set Complete" << endl;
+		else
+			cout << "Set Fail" << endl;
+	}
+};
+
+class DateTime
+{
+private:
+	Date date;
+	int hour, min, sec;
+public:
+	DateTime()	//缺省构造函数，读取当前系统日期和时间 
+	{
+		time_t now = time(0);
+		tm* ltm = localtime(&now);
+		hour = ltm->tm_hour;
+		min = ltm->tm_min;
+		sec = ltm->tm_sec;
+	}
+	DateTime(int year, int month, int day, int hour, int min, int sec):date(year, month, day)
+	{
+		this->hour = hour;
+		this->min = min;
+		this->sec = sec;
+	}
+	int getyear()
+	{
+		return date.getyear();
+	}
+	void setyear(int x)
+	{
+		date.setyear(x);
+	}
+	int getmonth()
+	{
+		return date.getmonth();
+	}
+	void setmonth(int x)
+	{
+		date.setmonth(x);
+	}
+	int getday()
+	{
+		return date.getday();
+	}
+	void setday(int x)
+	{
+		date.setday(x);
+	}
+	int gethour()
+	{
+		return hour;
+	}
+	void sethour(int x)
+	{
+		if (x >= 0 && x < 24)
+			hour = x, cout << "Set Complete" << endl;
+		else
+			cout << "Set Fail" << endl;
+	}
+	int getmin()
+	{
+		return min;
+	}
+	void setmin(int x)
+	{
+		if (x >= 0 && x < 60)
+			min = x, cout << "Set Complete" << endl;
+		else
+			cout << "Set Fail" << endl;
+	}
+	int getsec()
+	{
+		return sec;
+	}
+	void setsec(int x)
+	{
+		if (x >= 0 && x < 60)
+			sec = x, cout << "Set Complete" << endl;
+		else
+			cout << "Set Fail" << endl;
+	}
+	void show()
+	{
+		cout << "当前日期与时间" << endl;
+		int y = date.getyear(), m = date.getmonth(), d = date.getday();
+		cout << y << "年" << m << "月" << d << "日" << endl;
+		cout << hour << ":" << min << ":" << sec << endl;
+	}
+};
+
+int main()
+{
+	DateTime dt;
+	int cas1;
+	while (cout << "Press 1 to check the date and time,Press 2 to set time,Press 0 to exit" << endl, cin >> cas1 && cas1 != 0)
+	{
+		switch (cas1)
+		{
+			case 1:
+			{
+				int cas2;
+				while (cout << "Press 1 to check date and time,Press 2 to check certain date or time,Press 0 to back"<<endl, cin >> cas2 && cas2 != 0)
+				{
+					switch (cas2)
+					{
+						case 1:
+						{
+							dt.show();
+						}
+						break;
+						case 2:
+						{
+							string str1;
+							while (cout << "Which one do you want to check?" << endl,
+								cout << "CHOOSE ONE:year,month,day,hour,minute,second,  back" << endl, cin >> str1 && str1 != "back")
+							{
+								if (str1 == "year")
+								{
+									cout << "当前年份：" << dt.getyear() << endl;
+								}
+								else if (str1 == "month")
+								{
+									cout << "当前月份：" << dt.getmonth() << endl;
+								}
+								else if (str1 == "day")
+								{
+									cout << "当前日期：" << dt.getday() << endl;
+								}
+								else if (str1 == "hour")
+								{
+									cout << "当前小时：" << dt.gethour() << endl;
+								}
+								else if (str1 == "minute")
+								{
+									cout << "当前分钟：" << dt.getmin() << endl;
+								}
+								else if (str1 == "second")
+								{
+									cout << "当前秒：" << dt.getsec() << endl;
+								}
+							}
+						}
+						break;
+					}
+				}
+			}
+			break;
+			case 2:
+			{
+				string str2;
+				while (cout << "Which one do you want to set?"<<endl,
+					   cout << "CHOOSE ONE:year,month,day,hour,minute,second,  back"<<endl,cin >> str2 && str2 != "back")
+				{
+					if (str2 == "year")
+					{
+						cout << "Please input year" << endl;
+						int x;
+						cin >> x;
+						dt.setyear(x);
+					}
+					else if (str2 == "month")
+					{
+						cout << "Please input month" << endl;
+						int x;
+						cin >> x;
+						dt.setmonth(x);
+					}
+					else if (str2 == "day")
+					{
+						cout << "Please input day" << endl;
+						int x;
+						cin >> x;
+						dt.setday(x);
+					}
+					else if (str2 == "hour")
+					{
+						cout << "Please input hour" << endl;
+						int x;
+						cin >> x;
+						dt.sethour(x);
+					}
+					else if (str2 == "minute")
+					{
+						cout << "Please input minute" << endl;
+						int x;
+						cin >> x;
+						dt.setmin(x);
+					}
+					else if (str2 == "second")
+					{
+						cout << "Please input second" << endl;
+						int x;
+						cin >> x;
+						dt.setsec(x);
+					}
+				}
+			}
+			break;
+		}
+	}
+	return 0;
+}
