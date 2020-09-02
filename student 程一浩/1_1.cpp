@@ -1,4 +1,4 @@
-#include <iostream>//P252  8
+#include <iostream>//P252 8
 #include <string>
 using namespace std;
 class cat{
