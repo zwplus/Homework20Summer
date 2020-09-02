@@ -1,0 +1,99 @@
+//P252 第八题
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+class Cat
+{
+private:
+	int age;
+	double weight;
+	string color;
+public:
+	Cat()
+	{
+		age = 0;
+		weight = 0.0;
+		color = "\0";
+	}
+	void setage(int x)
+	{
+		age = x;
+	}
+	int getage()
+	{
+		return age;
+	}
+	void setweight(double x)
+	{
+		weight = x;
+	}
+	double getweight()
+	{
+		return weight;
+	}
+	void setcolor(string str)
+	{
+		color = str;
+	}
+	string getcolor()
+	{
+		return color;
+	}
+};
+
+int main()
+{
+	Cat cat[10];			//简单设置大小为10的小数组
+	int age=0;
+	double weight=0.0;
+	string color="\0";
+	int num, cas;
+	while (cout << "Press 1 to write,press 2 to read or you can press 0 to exit\n", cin >> cas && cas != 0 )
+	{
+		switch (cas)
+		{
+			case 1:
+			{
+				cout << "Which one? (more than 0 but less than 11)" << endl;
+				cin >> num;
+				cout << "Age?" << endl;
+				cin >> age;
+				cat[num - 1].setage(age);
+				cout << "Weight?" << endl;
+				cin >> weight;
+				cat[num - 1].setweight(weight);
+				cout << "Color?" << endl;
+				cin >> color;
+				cat[num - 1].setcolor(color);
+			}
+			break;
+			case 2:
+			{
+				cout << "Which one? (more than 0 but less than 11)" << endl;
+				cin >> num;
+				if (cat[num - 1].getage()!=0)
+				{
+					age = cat[num - 1].getage();
+					weight = cat[num - 1].getweight();
+					color = cat[num - 1].getcolor();
+					cout << endl;
+					cout << "age:" << age << endl;
+					cout << "weight:" << weight << endl;
+					cout << "color:" << color << endl;
+					cout << endl;
+				}
+				else
+				{
+					cout << endl;
+					cout<<"Sorry. There's no information about this cat."<<endl;
+					cout << endl;
+				}
+			}
+			break;
+		}
+	}
+	return 0;
+}
