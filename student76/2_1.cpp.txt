@@ -1,0 +1,56 @@
+//p293.14
+#include <iostream>
+using namespace std;
+#include <time.h>
+
+class Date{
+	    int year,month,day;
+	public:
+		Date(int y,int m,int d){
+			year=y;
+			month=m;
+			day=d;
+		}
+		Date(){
+			time_t ltime=time(NULL);
+			tm *today=localtime(&ltime);
+			year=today->tm_year+1900;
+			month=today->tm_mon+1;
+			day=today->tm_mday;
+		}
+		void setYear(int y) { year=y; }
+		void setMonth(int m) { month=m; }
+		void setDay(int d) { day=d; }
+		int getYear() { return year; }
+		int getMonth() { return month; }
+		int getDay() { return day; }
+};
+
+class DateTime{
+	    int hour,min,sec;
+	    Date date;
+	public:
+		DateTime(){
+			time_t ltime=time(NULL);
+			tm *today=localtime(&ltime);
+			hour=today->tm_hour;
+			min=today->tm_min;
+			sec=today->tm_sec; 
+		}
+		DateTime(int year,int month,int day,int hour,int min,int sec):date(year,month,day){
+			this->hour=hour;
+			this->min=min;
+			this->sec=sec; 
+		}
+		void show(){
+			cout<<date.getYear()<<"."<<date.getMonth()<<"."<<date.getDay()<<" "<<hour<<":"<<min<<":"<<sec<<endl;
+		}
+};
+
+int main(){
+	DateTime d1(2001,8,30,9,20,19),d2;
+	cout<<"d1: ";
+	d1.show();
+    cout<<"d2: ";
+	d2.show();
+}
